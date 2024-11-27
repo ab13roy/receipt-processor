@@ -1,8 +1,16 @@
 package com.fetch_rewards.receipt_processor.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Products")
 public class Product {
+
+    @Id
+    private String receiptId;
 
     @JsonProperty("shortDescription")
     private String shortDescription;
@@ -14,9 +22,18 @@ public class Product {
 
     }
 
-    public Product(String name, double cost) {
+    public Product(String receiptId, String name, double cost) {
+        this.receiptId = receiptId;
         this.shortDescription = name;
         this.cost = cost;
+    }
+
+    public String getReceiptId() {
+        return receiptId;
+    }
+
+    public void setReceiptId(String receiptId) {
+        this.receiptId = receiptId;
     }
 
     public String getShortDescription() {
@@ -37,8 +54,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Items{" +
-                "shortDescription='" + shortDescription + '\'' +
+        return "Product{" +
+                "receiptId='" + receiptId + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
                 ", cost=" + cost +
                 '}';
     }
