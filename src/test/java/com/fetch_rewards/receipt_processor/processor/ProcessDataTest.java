@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -26,7 +25,7 @@ public class ProcessDataTest {
 
 
     @Test
-    public void testReadReceiptShouldReturnValidReceipt() throws IOException {
+    public void testReadReceiptShouldReturnValidReceipt() throws Exception {
 
         Path file = Path.of("src/test/resources").resolve("example1");
 

@@ -1,11 +1,12 @@
 package com.fetch_rewards.receipt_processor.service;
 
+import com.fetch_rewards.receipt_processor.Exception.NotFoundException;
 import com.fetch_rewards.receipt_processor.entity.Product;
 
 import java.util.List;
 
 public interface PointsServices {
-    double calculatePointsForReceipt(String receiptId);
+    double calculatePointsForReceipt(String receiptId) throws NotFoundException;
 
     int calculatePointsForName(String retailerName);
 
@@ -15,7 +16,7 @@ public interface PointsServices {
 
     int countOfItemsOnReceipt(List<Product> productList);
 
-    int checkIfShortDescLengthIsMultipleOf3(Product product);
+    double checkIfShortDescLengthIsMultipleOf3(Product product);
 
     int checkIfDateOfPurchaseIsOdd(String purchaseDate);
 
