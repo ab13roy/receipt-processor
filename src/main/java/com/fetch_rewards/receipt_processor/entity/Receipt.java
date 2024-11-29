@@ -1,10 +1,12 @@
 package com.fetch_rewards.receipt_processor.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Receipt")
@@ -23,8 +25,8 @@ public class Receipt {
     private String purchaseTime;//add validations to time (24Hr clock)
 
     @JsonProperty("items")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "receiptId")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> items;
 
     private double total;
@@ -97,7 +99,7 @@ public class Receipt {
                 ", retailer='" + retailer + '\'' +
                 ", purchaseDate=" + purchaseDate +
                 ", purchaseTime='" + purchaseTime + '\'' +
-                ", items=" + items +
+                ", items=" + items.stream().map(Product :: toString).collect(Collectors.joining(", ")) +
                 ", total=" + total +
                 '}';
     }

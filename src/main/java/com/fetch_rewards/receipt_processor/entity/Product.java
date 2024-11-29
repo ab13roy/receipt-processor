@@ -1,16 +1,23 @@
 package com.fetch_rewards.receipt_processor.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import javax.annotation.processing.Generated;
 
 @Entity
 @Table(name = "Products")
 public class Product {
 
     @Id
-    private String receiptId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name ="receiptId")
+    private Receipt receipt;
 
     @JsonProperty("shortDescription")
     private String shortDescription;
@@ -22,18 +29,18 @@ public class Product {
 
     }
 
-    public Product(String receiptId, String name, double cost) {
-        this.receiptId = receiptId;
+    public Product(Receipt receipt, String name, double cost) {
+        this.receipt = receipt;
         this.shortDescription = name;
         this.cost = cost;
     }
 
-    public String getReceiptId() {
-        return receiptId;
+    public Receipt getReceipt() {
+        return receipt;
     }
 
-    public void setReceiptId(String receiptId) {
-        this.receiptId = receiptId;
+    public void setReceipt(Receipt receipt) {
+        this.receipt = receipt;
     }
 
     public String getShortDescription() {
@@ -55,7 +62,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "receiptId='" + receiptId + '\'' +
+                "receiptId='" + receipt.getReceiptId() + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", cost=" + cost +
                 '}';

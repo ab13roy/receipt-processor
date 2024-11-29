@@ -24,8 +24,8 @@ public class ReceiptServicesImpl implements ReceiptServices {
         return receiptRepository.findAll();
     }
 
-    public Receipt addReceipt(Receipt receipt) {
-        return receiptRepository.save(receipt);
+    public void addReceipt(Receipt receipt) {
+        receiptRepository.save(receipt);
     }
 
     public void deleteReceipt(String receiptId) {
