@@ -35,4 +35,14 @@ public class ValidationUtilTest {
         assertThrows(CustomException.class, () -> ValidationUtil.validatePurchaseTime("123:41"));
     }
 
+    @Test
+    public void testValidateCostWillThrowException() {
+        assertThrows(CustomException.class, () -> ValidationUtil.validateCost(-10d));
+    }
+
+    @Test
+    public void testValidateCostWillNotThrowException(){
+        assertDoesNotThrow(() -> ValidationUtil.validateCost(10.11));
+    }
+
 }
