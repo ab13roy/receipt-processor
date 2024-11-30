@@ -14,7 +14,7 @@ You can find the Swagger documentation for the API here:
 - [Link to Swagger](http://localhost:8080/swagger-ui/index.html#/)
 - <a href = "http://localhost:8080/swagger-ui/index.html#/" target="_blank"> Click to open in a new tab </a>
 - Screenshots for Swagger can be found at [SCREENSHOT](SCREENSHOT.md)
-- Additional help can be found at [HELP](help.md)
+- Additional help can be found at [HELP ME](HelpMe.md)
 
 ```Link will be active once the application is running```
 
@@ -59,7 +59,7 @@ This project is built with:
 
 ## ⚙️ Installation
 
-### Prerequisites
+### Prerequisites 
 - JDK 17 or higher <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" target="_blank"> Download JDK </a>
 - Gradle 8.x (or you can use the Gradle Wrapper) <a href="https://gradle.org/install/" target="_blank"> Install Gradle </a>
 
@@ -143,7 +143,7 @@ docker images
 ```shell
 docker run -p 8080:8080 receipt-processor
 ```
-### Additional help can be found at [HELP](help.md)
+### Additional help can be found at [HELP ME](HelpMe.md)
 
 ## 📝 Usage
 
