@@ -13,7 +13,8 @@ This Spring Boot application, built using Gradle, calculates reward points for r
 You can find the Swagger documentation for the API here: 
 - [Link to Swagger](http://localhost:8080/swagger-ui/index.html#/)
 - <a href = "http://localhost:8080/swagger-ui/index.html#/" target="_blank"> Click to open in a new tab </a>
-- Screenshots for Swagger can be found at [HELP](HELP.md)
+- Screenshots for Swagger can be found at [SCREENSHOT](SCREENSHOT.md)
+- Additional help can be found at [HELP](help.md)
 
 ```Link will be active once the application is running```
 
@@ -142,6 +143,7 @@ docker images
 ```shell
 docker run -p 8080:8080 receipt-processor
 ```
+### Additional help can be found at [HELP](help.md)
 
 ## 📝 Usage
 
@@ -239,4 +241,5 @@ Breakdown:
 - Validations are made to <u>cost, date, and time</u> fields. Failure to validate these fields will also return a <b><u>"400 Bad Request"</u></b>.
 
 ## Screenshots
+- Find them here at [SCREENSHOT](SCREENSHOT.md)
 
