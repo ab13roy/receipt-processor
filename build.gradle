@@ -30,6 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
 	implementation 'org.apache.commons:commons-lang3'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	runtimeOnly 'com.h2database:h2'
 	implementation 'com.zaxxer:HikariCP'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

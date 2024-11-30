@@ -10,7 +10,8 @@ This Spring Boot application, built using Gradle, calculates reward points for r
 - Based on predefined rules, it calculates and returns the points for that receipt
 
 ## 📖 Swagger Doc
-You can find the Swagger documentation for the API here:[Link to Swagger]()
+You can find the Swagger documentation for the API here:[Link to Swagger](http://localhost:8080/swagger-ui/index.html#/)
+```Link will be active once the application is running```
 
 
 ### 🏆 Rules for points:

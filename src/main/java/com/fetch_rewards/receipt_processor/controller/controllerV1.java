@@ -10,6 +10,10 @@ import com.fetch_rewards.receipt_processor.processor.ProcessData;
 import com.fetch_rewards.receipt_processor.service.PointsServicesImpl;
 import com.fetch_rewards.receipt_processor.service.ProductServicesImpl;
 import com.fetch_rewards.receipt_processor.service.ReceiptServicesImpl;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,19 +45,31 @@ public class controllerV1 {
     @Autowired
     ReceiptServicesImpl receiptServices;
 
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = PostEntity.class)) }),
+            @ApiResponse(responseCode = "400", description = "Unable to process request",
+                    content = @Content)
+    })
     @PostMapping("/process")
-    public ResponseEntity<PostEntity> processReceipts(@RequestBody String givenReceipt) throws JsonProcessingException, CustomException {
+    public ResponseEntity<PostEntity> processReceipts(@RequestBody Receipt givenReceipt) throws JsonProcessingException, CustomException {
         MDC.clear();
         MDC.put("context", UUID.randomUUID().toString());
 
         logger.info("Method Post Received request to parse {} at {}", givenReceipt, LocalDate.now());
 
-        Receipt receipt = processData.readReceipt(givenReceipt);
+        processData.readReceipt(givenReceipt);
 
-        receiptServices.addReceipt(receipt);
-        return new ResponseEntity<>(new PostEntity(receipt.getReceiptId()), HttpStatus.ACCEPTED);
+        receiptServices.addReceipt(givenReceipt);
+
+        return new ResponseEntity<>(new PostEntity(givenReceipt.getReceiptId()), HttpStatus.ACCEPTED);
     }
 
+    @ApiResponses({
+            @ApiResponse(responseCode = "202", content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = GetEntity.class)) }),
+            @ApiResponse(responseCode = "400", description = "Unable to process request", content = @Content)
+    })
     @GetMapping("/{id}/points")
     public ResponseEntity<GetEntity> getPoints(@PathVariable("id") String receiptId ) throws NotFoundException {
         MDC.clear();

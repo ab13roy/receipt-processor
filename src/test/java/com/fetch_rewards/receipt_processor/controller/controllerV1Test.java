@@ -24,8 +24,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class controllerV1Test extends UtilsForTests {
@@ -54,10 +53,10 @@ public class controllerV1Test extends UtilsForTests {
     public void testProcessReceiptsFromTarget() throws Exception {
         Receipt receipt = createReceiptForTarget();
 
-        when(processData.readReceipt(any())).thenReturn(receipt);
+        doNothing().when(processData).readReceipt(any());
         doNothing().when(receiptServices).addReceipt(any());
 
-        ResponseEntity<PostEntity> result = controller.processReceipts(UtilsForTests.targetJson);
+        ResponseEntity<PostEntity> result = controller.processReceipts(receipt);
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertNotNull(result.getBody());
@@ -79,9 +78,9 @@ public class controllerV1Test extends UtilsForTests {
         assertThrows( JsonParseException.class, () -> {
             Receipt receipt = createReceiptForTarget();
 
-            when(processData.readReceipt(any())).thenThrow(JsonParseException.class);
+            doThrow(JsonParseException.class).when(processData).readReceipt(any());
 
-            ResponseEntity<PostEntity> result = controller.processReceipts(UtilsForTests.targetJson.substring(0, 20));
+            ResponseEntity<PostEntity> result = controller.processReceipts(receipt);
             assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
         });
     }
