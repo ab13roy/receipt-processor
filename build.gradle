@@ -2,8 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.0'
 	id 'io.spring.dependency-management' version '1.1.6'
-	id 'jacoco'
-	id 'org.sonarqube' version '3.5.0.2730'
 }
 
 group = 'com.fetch-rewards'
@@ -13,10 +11,6 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
-}
-
-jacoco {
-	toolVersion = "0.8.8" // You can use the latest version of JaCoCo
 }
 
 ext {
@@ -48,22 +42,6 @@ dependencyManagement {
 	}
 }
 
-jacocoTestReport {
-	reports {
-		xml.required = true
-	}
-}
-
-sonarqube {
-	properties {
-		property "sonar.projectKey", "ab13roy_receipt-processor"
-		property "sonar.organization", "ab13roy"
-		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.login", "52e653a97d5ae0d78c24f690d52b525fe5cefe1b"
-	}
-}
-
 tasks.named('test') {
 	useJUnitPlatform()
-	finalizedBy jacocoTestReport
 }
