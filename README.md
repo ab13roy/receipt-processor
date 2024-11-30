@@ -10,9 +10,12 @@ This Spring Boot application, built using Gradle, calculates reward points for r
 - Based on predefined rules, it calculates and returns the points for that receipt
 
 ## 📖 Swagger Doc
-You can find the Swagger documentation for the API here:[Link to Swagger](http://localhost:8080/swagger-ui/index.html#/) </br>
-```Link will be active once the application is running```
+You can find the Swagger documentation for the API here: 
+- [Link to Swagger](http://localhost:8080/swagger-ui/index.html#/)
+- <a href = "http://localhost:8080/swagger-ui/index.html#/" target="_blank"> Click to open in a new tab </a>
+- Screenshots for Swagger can be found at [HELP](HELP.md)
 
+```Link will be active once the application is running```
 
 ### 🏆 Rules for points:
 These rules collectively define how many points should be awarded to a receipt.
@@ -43,21 +46,21 @@ This endpoint accepts a JSON payload representing the receipt and returns a uniq
 2. GET /receipts/{id}/points
 This endpoint accepts the receipt ID returned from the POST method and returns the calculated points.
 
-Refer to the [Usage](#usage) and [Testing](#testing) sections for further details on how to interact with these endpoints.
+Refer to the [Usage](#-usage) and [Testing](#-testing) sections for further details on how to interact with these endpoints.
 
 
 ## 🧰 Technologies
 This project is built with:
-- [Spring Boot](https://spring.io/projects/spring-boot) - Framework for Java-based applications
-- [Gradle](https://gradle.org/) - Build automation tool
-- [H2 Database](https://www.h2database.com/) - In-memory database (or mention your DB here)
-- [JPA/Hibernate](https://hibernate.org/) - ORM for database interaction
+- <a href="https://spring.io/projects/spring-boot" target="_blank"> Spring Boot </a> - Framework for Java-based applications
+- <a href="https://gradle.org/" target="_blank"> Gradle </a> - Build automation tool
+- <a href="https://www.h2database.com/" target="_blank"> H2 Database </a> - In-memory database (or mention your DB here)
+- <a href="https://hibernate.org/" target="_blank"> JPA/Hibernate </a> - ORM for database interaction
 
 ## ⚙️ Installation
 
 ### Prerequisites
-- JDK 17 or higher [Download Jdk](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-- Gradle 8.x (or you can use the Gradle Wrapper) [Install Gradle](https://gradle.org/install/)
+- JDK 17 or higher <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" target="_blank"> Download JDK </a>
+- Gradle 8.x (or you can use the Gradle Wrapper) <a href="https://gradle.org/install/" target="_blank"> Install Gradle </a>
 
 ### Steps
 1. Clone this repository:
@@ -77,10 +80,11 @@ This project is built with:
     ```
 
 ### The application will start running on `http://localhost:8080`.
+### More details on running the application can be found at [HELP](HELP.md)
 
 ## 🔧 Configuration
 
-You can configure various aspects of the application by editing the ```application.properties``` file located at ```src/main/resources/application.properties```.
+You can configure the application by editing the ```application.properties``` file located at ```src/main/resources/application.properties```.
 
 Example configuration for a database:
 ```properties
@@ -92,18 +96,18 @@ spring.datasource.password=password
 
 ## 🚀 Running the application
 
-Once the command ```./gradlew build``` is executed a jar file will be created. </br>
-This jar file can be found at path ```~/build/libs/* ``` </br>
-Running the build commands will replace previously existing jar files, unless the build version specified in the ```build.gradle``` file on line ```#8 version = '1.0.1-SNAPSHOT'``` is updated. </br>
+- Once the command ```./gradlew build``` is executed a jar file will be created. </br>
+- This jar file can be found at path ```~/build/libs/* ``` </br>
+- Running the build commands will replace previously existing jar files, unless the build version specified in the ```build.gradle``` file at line ```#8 version = '1.0.1-SNAPSHOT'``` is updated. </br>
 
 Once the project is built, you can run the application in different ways:
 
 ### Using Java Cli
-1. After building the project, navigate to the build/libs folder:
+- After building the project, navigate to the build/libs folder:
 ```shell
 cd /build/libs
 ```
-2. Run the application using:
+- Run the application using:
 ```shell
 java -jar receipt-processor-1.0.1-SNAPSHOT.jar
 ```
@@ -121,20 +125,20 @@ docker run -p 8080:8080 receipt-processor
 
 ## 🐳 Docker
 This section will guide you through Dockerizing the application.
-- Please refer official docker documentation at [Docker](https://docs.docker.com/) for any guides.
-- First, ensure that you have Docker installed. [Docker Desktop](https://docs.docker.com/get-started/get-docker/).
+- Please refer official docker documentation at <a href="https://docs.docker.com/" target="_blank"> Docker </a> for any guides.
+- First, ensure that you have Docker installed. <a href="https://docs.docker.com/get-started/get-docker/" target="_blank"> Docker Desktop</a>.
 - The project already includes a Dockerfile for building the Docker image.
-- 
+
 ### Steps to Create the Docker Image
-1. Navigate to the project directory and build the image:
+- Navigate to the project directory and build the image:
 ```shell
 docker build -t receipt-processor .
 ```
-2. Verify that the image has been created:
+- Verify that the image has been created:
 ```shell
 docker images
 ```
-3. Run the container with:
+- Run the container with:
 ```shell
 docker run -p 8080:8080 receipt-processor
 ```
@@ -199,7 +203,7 @@ Payload 2
 ```bash
 curl --location 'localhost:8080/receipts/process' \
 --header 'Content-Type: application/json' \
---data '{"retailer":"Target","purchaseDate":"2022-01-01","purchaseTime":"13:01","items":[{"shortDescription":"Mountain Dew 12PK","price":"6.49"},{"shortDescription":"Emils Cheese Pizza","price":"12.25"},{"shortDescription":"Knorr Creamy Chicken","price":"1.26"},{"shortDescription":"Doritos Nacho Cheese","price":"3.35"},{"shortDescription":"   Klarbrunn 12-PK 12 FL OZ  ","price":"12.00"}],"total":"35.35"}'
+--data '{"retailer": "Target", "purchaseDate": "2022-01-01", "purchaseTime": "13:01", "items": [{"shortDescription": "Mountain Dew 12PK", "price": "6.49"}, {"shortDescription": "Emils Cheese Pizza", "price": "12.25"}, {"shortDescription": "Knorr Creamy Chicken", "price": "1.26"}], "total": "35.35"}'
 ```
 - Response
 ```json
@@ -230,9 +234,9 @@ Breakdown:
 ```
 
 ## 🧪 Testing
-- Invalid Payload: If the payload is invalid, the server will return a <b><u>400 Bad Request</u></b> with the message <b><u>"Unable to process request."</u></b>
-- Invalid ID: If an invalid receipt ID is provided for the GET request, the server will return a <b><u>404 Not Found</u></b> with the message <b><u>"Unable to find receipt."</u></b>
-- Validations are made <u>cost, date, and time</u> fields. Failure to validate these fields will also return a <b><u>400 Bad Request</u></b>.
+- Invalid Payload: If the payload is invalid, the server will return a <b><u>"400 Bad Request</u></b> with the message <b><u>"Unable to process request."</u></b>
+- Invalid ID: If an invalid receipt ID is provided for the GET request, the server will return a <b><u>"404 Not Found"</u></b> with the message <b><u>"Unable to find receipt."</u></b>
+- Validations are made to <u>cost, date, and time</u> fields. Failure to validate these fields will also return a <b><u>"400 Bad Request"</u></b>.
 
-
+## Screenshots
 
