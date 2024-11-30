@@ -75,7 +75,7 @@ public class controllerV1 {
         MDC.clear();
         MDC.put("context", UUID.randomUUID().toString());
 
-        logger.info("Method Get Received request to parse {} at {}", receiptId, LocalDate.now());
+        logger.info("Method Get Received request to unable to parse id");
 
         Integer finalPoints = pointsServices.calculatePointsForReceipt(receiptId);
 
