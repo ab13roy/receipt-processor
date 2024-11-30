@@ -6,7 +6,7 @@ import com.fetch_rewards.receipt_processor.entity.Product;
 import java.util.List;
 
 public interface PointsServices {
-    double calculatePointsForReceipt(String receiptId) throws NotFoundException;
+    Integer calculatePointsForReceipt(String receiptId) throws NotFoundException;
 
     int calculatePointsForName(String retailerName);
 
@@ -16,7 +16,7 @@ public interface PointsServices {
 
     int countOfItemsOnReceipt(List<Product> productList);
 
-    double checkIfShortDescLengthIsMultipleOf3(Product product);
+    int checkIfShortDescLengthIsMultipleOf3(Product product);
 
     int checkIfDateOfPurchaseIsOdd(String purchaseDate);
 

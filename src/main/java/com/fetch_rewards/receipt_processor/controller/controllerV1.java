@@ -3,6 +3,8 @@ package com.fetch_rewards.receipt_processor.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fetch_rewards.receipt_processor.Exception.CustomException;
 import com.fetch_rewards.receipt_processor.Exception.NotFoundException;
+import com.fetch_rewards.receipt_processor.entity.GetEntity;
+import com.fetch_rewards.receipt_processor.entity.PostEntity;
 import com.fetch_rewards.receipt_processor.entity.Receipt;
 import com.fetch_rewards.receipt_processor.processor.ProcessData;
 import com.fetch_rewards.receipt_processor.service.PointsServicesImpl;
@@ -40,7 +42,7 @@ public class controllerV1 {
     ReceiptServicesImpl receiptServices;
 
     @PostMapping("/process")
-    public ResponseEntity<String> processReceipts(@RequestBody String givenReceipt) throws JsonProcessingException, CustomException {
+    public ResponseEntity<PostEntity> processReceipts(@RequestBody String givenReceipt) throws JsonProcessingException, CustomException {
         MDC.clear();
         MDC.put("context", UUID.randomUUID().toString());
 
@@ -49,19 +51,19 @@ public class controllerV1 {
         Receipt receipt = processData.readReceipt(givenReceipt);
 
         receiptServices.addReceipt(receipt);
-        return new ResponseEntity<>(receipt.getReceiptId(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(new PostEntity(receipt.getReceiptId()), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{id}/points")
-    public ResponseEntity<Double> getPoints(@PathVariable("id") String receiptId ) throws NotFoundException {
+    public ResponseEntity<GetEntity> getPoints(@PathVariable("id") String receiptId ) throws NotFoundException {
         MDC.clear();
         MDC.put("context", UUID.randomUUID().toString());
 
         logger.info("Method Get Received request to parse {} at {}", receiptId, LocalDate.now());
 
-        Double finalPoints = pointsServices.calculatePointsForReceipt(receiptId);
+        Integer finalPoints = pointsServices.calculatePointsForReceipt(receiptId);
 
-        return new ResponseEntity<>(finalPoints, HttpStatus.OK);
+        return new ResponseEntity<>(new GetEntity(finalPoints), HttpStatus.OK);
     }
 
     @ExceptionHandler({JsonProcessingException.class, CustomException.class})

@@ -22,12 +22,12 @@ public class PointsServicesImpl implements PointsServices{
     static final String regex = "^[a-zA-Z0-9]+$";
 
     @Override
-    public double calculatePointsForReceipt(String receiptId) throws NotFoundException {
+    public Integer calculatePointsForReceipt(String receiptId) throws NotFoundException {
         Receipt receipt = receiptServices.getReceiptById(receiptId);
         if(receipt == null) {
             throw new NotFoundException("Could not find requested receipt");
         }
-        double total = 0d;
+        Integer total = Integer.valueOf(0);
         total += calculatePointsForName(receipt.getRetailer());
         total += checkIfRoundDollarAmount(receipt.getTotal());
         total += checkIfMultipleOf25(receipt.getTotal());
@@ -71,10 +71,10 @@ public class PointsServicesImpl implements PointsServices{
     }
 
     @Override
-    public double checkIfShortDescLengthIsMultipleOf3(Product product) {
+    public int checkIfShortDescLengthIsMultipleOf3(Product product) {
         // if the length is multiple of 3, multiply cost by 0.2 and round to the next integer
         StringBuilder sb = new StringBuilder(StringUtils.trim(product.getShortDescription()));
-        return (sb.length() % 3) == 0? Math.ceil(product.getCost() * 0.2) : 0;
+        return (sb.length() % 3) == 0? (int) Math.ceil(product.getCost() * 0.2) : 0;
     }
 
     @Override

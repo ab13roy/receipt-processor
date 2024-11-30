@@ -3,6 +3,8 @@ package com.fetch_rewards.receipt_processor.controller;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fetch_rewards.receipt_processor.Exception.CustomException;
 import com.fetch_rewards.receipt_processor.Exception.NotFoundException;
+import com.fetch_rewards.receipt_processor.entity.GetEntity;
+import com.fetch_rewards.receipt_processor.entity.PostEntity;
 import com.fetch_rewards.receipt_processor.entity.Receipt;
 import com.fetch_rewards.receipt_processor.processor.ProcessData;
 import com.fetch_rewards.receipt_processor.service.PointsServicesImpl;
@@ -55,7 +57,7 @@ public class controllerV1Test extends UtilsForTests {
         when(processData.readReceipt(any())).thenReturn(receipt);
         doNothing().when(receiptServices).addReceipt(any());
 
-        ResponseEntity<String> result = controller.processReceipts(UtilsForTests.targetJson);
+        ResponseEntity<PostEntity> result = controller.processReceipts(UtilsForTests.targetJson);
 
         assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
         assertNotNull(result.getBody());
@@ -63,12 +65,13 @@ public class controllerV1Test extends UtilsForTests {
 
     @Test
     public void testGetPointsShouldReturnSomething() throws NotFoundException {
-        when(pointsServices.calculatePointsForReceipt(any())).thenReturn(10d);
+        when(pointsServices.calculatePointsForReceipt(any())).thenReturn(10);
 
-        ResponseEntity<Double> result = controller.getPoints("123");
+        ResponseEntity<GetEntity> result = controller.getPoints("123");
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
-        assertEquals(10d, result.getBody());
+        assertNotNull(result.getBody());
+        assertEquals(10, result.getBody().getPoints());
     }
 
     @Test
@@ -78,7 +81,7 @@ public class controllerV1Test extends UtilsForTests {
 
             when(processData.readReceipt(any())).thenThrow(JsonParseException.class);
 
-            ResponseEntity<String> result = controller.processReceipts(UtilsForTests.targetJson.substring(0, 20));
+            ResponseEntity<PostEntity> result = controller.processReceipts(UtilsForTests.targetJson.substring(0, 20));
             assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
         });
     }
