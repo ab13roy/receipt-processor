@@ -15,6 +15,10 @@ java {
 	}
 }
 
+jacoco {
+	toolVersion = "0.8.8" // You can use the latest version of JaCoCo
+}
+
 ext {
 	set('springCloudVersion', "2024.0.0-RC1")
 }
@@ -50,6 +54,16 @@ jacocoTestReport {
 	}
 }
 
+sonarqube {
+	properties {
+		property "sonar.projectKey", "ab13roy_receipt-processor"
+		property "sonar.organization", "ab13roy"
+		property "sonar.host.url", "https://sonarcloud.io"
+		property "sonar.login", "52e653a97d5ae0d78c24f690d52b525fe5cefe1b"
+	}
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
 }
