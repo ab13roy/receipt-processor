@@ -1,5 +1,7 @@
-# 🚀 My Spring Boot Application : receipt-processor
+# 🚀 My Spring Boot Application : receipt-processor 
 A Spring Boot application built with Gradle to process receipts and calculate reward points.
+
+(83% lines covered by unit tests)
 
 ## 📜 Description
 This Spring Boot application, built using Gradle, calculates reward points for receipts based on predefined rules. It solves the challenge described in the receipt-processor-challenge. Here's a quick overview of how it works:
