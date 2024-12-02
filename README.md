@@ -1,7 +1,7 @@
 # 🚀 My Spring Boot Application : receipt-processor 
 A Spring Boot application built with Gradle to process receipts and calculate reward points.
 
-(83% lines covered by unit tests)
+(81% lines covered by unit tests. Did not add unit tests for library functions/ code)
 
 ## 📜 Description
 This Spring Boot application, built using Gradle, calculates reward points for receipts based on predefined rules. It solves the challenge described in the receipt-processor-challenge. Here's a quick overview of how it works:
@@ -11,12 +11,11 @@ This Spring Boot application, built using Gradle, calculates reward points for r
 
 ## 📖 Swagger Doc
 You can find the Swagger documentation for the API here: 
-- [Link to Swagger](http://localhost:8080/swagger-ui/index.html#/)
-- <a href = "http://localhost:8080/swagger-ui/index.html#/" target="_blank"> Click to open in a new tab </a>
+- Swagger link ```http://localhost:8080/swagger-ui/index.html#/```
 - Screenshots for Swagger can be found at [SCREENSHOT](SCREENSHOT.md)
 - Additional help can be found at [HELP ME](HelpMe.md)
 
-```Link will be active once the application is running```
+```Swagger link will be active once the application is running```
 
 ### 🏆 Rules for points:
 These rules collectively define how many points should be awarded to a receipt.
@@ -37,14 +36,15 @@ These rules collectively define how many points should be awarded to a receipt.
 - [Docker](#-docker)
 - [Usage](#-usage)
 - [Testing](#-testing)
+- [Screenshots](#-screenshots)
 
 ## 🛠️ Features
 The application provides two main endpoints:
 
-1. POST /receipts/process
+1. POST ```/receipts/process```
 This endpoint accepts a JSON payload representing the receipt and returns a unique identifier (id).
 
-2. GET /receipts/{id}/points
+2. GET ```/receipts/{id}/points```
 This endpoint accepts the receipt ID returned from the POST method and returns the calculated points.
 
 Refer to the [Usage](#-usage) and [Testing](#-testing) sections for further details on how to interact with these endpoints.
@@ -236,10 +236,10 @@ Breakdown:
 ```
 
 ## 🧪 Testing
-- Invalid Payload: If the payload is invalid, the server will return a <b><u>"400 Bad Request</u></b> with the message <b><u>"Unable to process request."</u></b>
-- Invalid ID: If an invalid receipt ID is provided for the GET request, the server will return a <b><u>"404 Not Found"</u></b> with the message <b><u>"Unable to find receipt."</u></b>
-- Validations are made to <u>cost, date, and time</u> fields. Failure to validate these fields will also return a <b><u>"400 Bad Request"</u></b>.
+- ```Invalid Payload```: If the payload is invalid, the server will return a ```400 Bad Request``` with the message ```Unable to process request```.
+- ```Invalid ID```: If an invalid receipt ID is provided for the GET request, the server will return a ```404 Not Found``` with the message ```Unable to find receipt```.
+- Validations are made to ```cost, date, and time``` fields. Failure to validate these fields will also return a ```400 Bad Request```.
 
-## Screenshots
+## 📷 Screenshots
 - Find them here at [SCREENSHOT](SCREENSHOT.md)
 

@@ -94,4 +94,10 @@ public class controllerV1 {
         return new ResponseEntity<>("Unable to find receipt", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> allOtherExceptions(HttpServletRequest req, Exception ex) {
+        logger.info(" Internal processing error from {}. Error msg {}", req.getRequestURI(), ex.getMessage());
+        return new ResponseEntity<>("Unknown error occurred ", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

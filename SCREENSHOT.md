@@ -16,3 +16,9 @@
 ![postReq.png](Assets%2FpostReq.png)
 
 ![getReq.png](Assets%2FgetReq.png)
+
+![postmanGetError.png](Assets%2FpostmanGetError.png)
+
+![postmanPostError.png](Assets%2FpostmanPostError.png)
+
+![postManPostError2.png](Assets%2FpostManPostError2.png)
