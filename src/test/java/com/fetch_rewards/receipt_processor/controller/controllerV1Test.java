@@ -109,4 +109,16 @@ public class controllerV1Test extends UtilsForTests {
 
         assertEquals(HttpStatus.NOT_FOUND, controller.parseException2(request, ex).getStatusCode());
     }
+
+    @Test
+    public void testAllOtherException() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setServerName("www.something.com");
+        request.setRequestURI("/1-2-3/points");
+        request.setContentType("application/json");
+
+        Exception ex = new RuntimeException("Mismatched Data");
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, controller.allOtherExceptions(request, ex).getStatusCode());
+    }
 }
